@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:maj_connect/accueil.dart';
+import 'package:maj_connect/profil.dart';
  // Assuming you have an InscriptionPage
 
 class Authentification extends StatefulWidget {

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:maj_connect/authentification.dart';
 
-import 'accueil.dart';
+import 'profil.dart';
 
 void main() {
   runApp(const MyApp());
