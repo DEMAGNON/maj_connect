@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:maj_connect/authentification.dart';
 
-import 'profil.dart';
+import 'accueil.dart';
 
 void main() {
   runApp(const MyApp());
@@ -18,7 +17,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const Authentification(),
+      home: const AccueilPage(),
     );
   }
 }
