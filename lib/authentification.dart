@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:maj_connect/connexion/form_compte.dart';
 import 'package:maj_connect/profil.dart';
  // Assuming you have an InscriptionPage
 
@@ -108,12 +109,12 @@ class _AuthentificationState extends State<Authentification> {
             // Bouton pour rediriger vers la page d'inscription
             TextButton(
               onPressed: () {
-               /*  Navigator.push(
+                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    // builder: (context) => const (), // Redirection vers la page d'inscription
+                     builder: (context) => UserForm(), // Redirection vers la page d'inscription
                   ),
-                ); */
+                ); 
               },
               child: const Text(
                 "Pas encore inscrit ? S'inscrire",
