@@ -1,78 +1,123 @@
 import 'package:flutter/material.dart';
-// import 'package:maj_connect/accueil.dart';
+import 'package:maj_connect/accueil.dart';
+ // Assuming you have an InscriptionPage
 
-class PhoneAuthScreen extends StatefulWidget {
-  final String verificationId;
-
-  PhoneAuthScreen({required this.verificationId});
+class Authentification extends StatefulWidget {
+  const Authentification({super.key});
 
   @override
-  _PhoneAuthScreenState createState() => _PhoneAuthScreenState();
+  State<Authentification> createState() => _AuthentificationState();
 }
 
-class _PhoneAuthScreenState extends State<PhoneAuthScreen> {
-  final TextEditingController _otpController = TextEditingController();
+class _AuthentificationState extends State<Authentification> {
+  String _phoneNumber = ''; // Variable pour stocker le numéro de téléphone
 
-  /* Future<void> _submitOTP(BuildContext context) async {
-    String otp = _otpController.text.trim();
-   
-      await auth.signInWithCredential(credential);
-      print(credential);
+  // Fonction pour soumettre le numéro de téléphone
+  void _submitPhoneNumber() {
+    if (_phoneNumber.isEmpty) {
+      // Affiche une alerte si le numéro est vide
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text("Veuillez entrer un numéro de téléphone.")),
+      );
+    } else {
+      print("Numéro de téléphone soumis : $_phoneNumber");
+      // Naviguer vers la page d'accueil après la soumission
       Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => AccueilPage()),
+        MaterialPageRoute(builder: (context) => const AccueilPage()), // Navigation vers AccueilPage
       );
-    } catch (e) {
-      print(e.toString());
     }
-  } */
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Phone Authentication")),
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(50),
+        child: AppBar(
+          backgroundColor: Colors.deepPurple, // Couleur de l'AppBar
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.only(
+              bottomLeft: Radius.circular(30),
+              bottomRight: Radius.circular(30),
+            ),
+          ),
+          title: const Text(
+            "Connexion",
+            style: TextStyle(fontSize: 24, fontWeight: FontWeight.w700),
+          ),
+          elevation: 10, // Ajout d'une ombre
+        ),
+      ),
       body: Padding(
-        padding: EdgeInsets.all(16),
+        padding: const EdgeInsets.all(16.0),
         child: Column(
           children: [
-            SizedBox(height: 60),
-            Center(
+            const SizedBox(height: 40),
+            const Center(
               child: Text(
-                "OTP Authentication",
-                style: TextStyle(fontSize: 30, fontWeight: FontWeight.w100),
+                "Se connecter",
+                style: TextStyle(fontSize: 30, fontWeight: FontWeight.w600),
               ),
             ),
-            SizedBox(height: 50),
-            Padding(
-              padding: EdgeInsets.symmetric(vertical: 8, horizontal: 50),
-              child: TextFormField(
-                controller: _otpController,
-                keyboardType: TextInputType.phone,
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                  labelText: "Phone OTP",
+            const SizedBox(height: 60),
+            // Champ de saisie du numéro de téléphone sans contrôleur
+            TextFormField(
+              onChanged: (value) {
+                setState(() {
+                  _phoneNumber = value;
+                });
+              },
+              keyboardType: TextInputType.phone,
+              decoration: InputDecoration(
+                filled: true,
+                fillColor: Colors.white, // Couleur de fond du champ
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(20),
+                  borderSide: BorderSide(color: Colors.deepPurple, width: 2),
+                ),
+                labelText: 'Numéro de téléphone',
+                prefixIcon: const Icon(Icons.phone),
+                labelStyle: const TextStyle(
+                  color: Colors.deepPurple,
+                  fontWeight: FontWeight.w500,
                 ),
               ),
             ),
-            SizedBox(height: 16),
-            InkWell(
-              // onTap: () => _submitOTP(context),
-              child: Container(
-                padding: EdgeInsets.symmetric(vertical: 12, horizontal: 25),
-                decoration: BoxDecoration(
-                  color: Colors.indigo,
+            const SizedBox(height: 20),
+            // Bouton Se connecter avec onPressed
+            ElevatedButton(
+              onPressed: _submitPhoneNumber, // Appel de la fonction de navigation
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.deepPurple, // Couleur du bouton
+                shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(20),
                 ),
-                child: Text(
-                  "Verify",
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 18,
-                  ),
+                padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 25),
+              ),
+              child: const Text(
+                "Se connecter",
+                style: TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 18,
                 ),
+              ),
+            ),
+            const SizedBox(height: 20),
+            // Bouton pour rediriger vers la page d'inscription
+            TextButton(
+              onPressed: () {
+               /*  Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    // builder: (context) => const (), // Redirection vers la page d'inscription
+                  ),
+                ); */
+              },
+              child: const Text(
+                "Pas encore inscrit ? S'inscrire",
+                style: TextStyle(fontSize: 16, color: Colors.blue),
               ),
             ),
           ],
